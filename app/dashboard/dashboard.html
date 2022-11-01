@@ -1,0 +1,36 @@
+<div class="LoadingPanel" ng-if="loading === true">
+    <img class="LoadingImage" src="./image/loading.jpg" alt="loading image" /> <br />
+    <label>Places are loading...</label>
+</div>
+
+<div class="Dashboard" ng-if="loading === false">
+    <input class="SearchBox" ng-model="searchText.name" type="text" placeholder="Enter name to search" />
+
+    <table class='PlacesTable'>
+        <thead>
+            <tr>
+                <td>Name</td>
+                <td>Address</td>
+                <td>Rating</td>
+                <td>Type</td>
+                <td>Picture</td>
+                <td>Action</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="place in places | filter:searchText">
+                <td>{{ place.name }}</td>
+                <td>{{ place.address }}</td>
+                <td>{{ place.rating }}</td>
+                <td>{{ place.type }}</td>
+                <td><img class='PlaceImage' ng-src={{place.picture}} alt='Pictures' /></td>
+                <td>
+                    <button type="button" class="UpdateBtn" ng-click="updatePlace(place.placeID)">Update</button>
+                    <button type="button" class="DeleteBtn" ng-click="deletePlace(place.placeID)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button class="CreateBtn" ng-click="createNewPlace()">Create New Tourist Place</button>
+</div>
